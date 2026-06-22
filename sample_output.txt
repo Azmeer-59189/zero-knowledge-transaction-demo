@@ -1,0 +1,64 @@
+=== Q1: Privacy Preserving Transaction System ===
+
+Deposit Phase: multiple users deposit into one mixing pool
+Ali deposited. Stored commitment: 84624dd234bfd4db0f2f...
+Sara deposited. Stored commitment: 1713d6a2ad4243c50242...
+Ahmed deposited. Stored commitment: 3a86a84b02a62f1f9163...
+Zain deposited. Stored commitment: 55eabf7ebffe85d17672...
+Ebad deposited. Stored commitment: 2730ee116db9be045e5d...
+
+Current mixing pool size: 5
+Because commitments are mixed together, outsider cannot directly link deposit to withdrawal.
+
+Proof + Withdrawal Phase
+Proof sent to verifier:
+commitment: 3a86a84b02a62f1f9163be446ea9c7...
+nullifier_hash: 9d644649384415d6e31c5fc61e5673...
+Original secret is NOT shown to verifier.
+Withdrawal successful to anonymous receiver: anonymous_wallet_001
+
+Double Spending Test: same proof used again
+Withdrawal failed: invalid proof or double spending detected.
+Second withdrawal success? False
+
+Attack Simulation:
+Withdrawal failed: invalid proof or double spending detected.
+Attack success? False
+=== Q2 Part 1: 4-Digit PIN ZKP Simulation ===
+
+Public commitment: b1b2235a44fde603c71b62d2ff7dd6ab9284edb167407961922fad2c44ddcf3d
+Actual PIN is kept private and never printed.
+
+Protocol iterations: 100
+Honest prover successful rounds: 100/100
+Cheating prover success probability by random guessing:
+(1/2)^100 = 0.00000000000000000000000000000078886090522101180541172856528278622967320643510902
+=== Q2 Part 2: Merkle Tree Anonymity System ===
+
+Total deposits: 10
+Merkle Root: bdb7b633ca5bc8f238d863b3d564076fcd2491b50d13604d74fd0087c627cc2b
+
+Verification for 3 different leaves:
+Leaf 0 verification result: True
+Proof length for leaf 0: 4 sibling hashes
+Leaf 4 verification result: True
+Proof length for leaf 4: 4 sibling hashes
+Leaf 9 verification result: True
+Proof length for leaf 9: 4 sibling hashes
+
+Critical Answer:
+If outsider sees only the root and valid proof, they cannot directly determine which deposit was spent
+because the root is only a digest of the whole tree and the proof contains hashes, not user identities.
+The anonymity set size is 10 because there are 10 possible depositors in the pool.
+
+======================================================================
+Running Q1_privacy_transaction.py
+======================================================================
+
+======================================================================
+Running Q2_part1_zkp_pin.py
+======================================================================
+
+======================================================================
+Running Q2_part2_merkle_tree.py
+======================================================================
